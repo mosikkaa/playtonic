@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import NavLinks from "./NavLinks";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -6,36 +7,35 @@ export default async function Navbar() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: club } = user
+    ? await supabase.from("clubs").select("id").eq("owner_id", user.id).single()
+    : { data: null };
+
   return (
-    <nav className="border-b border-gray-100 px-4 py-4">
-      <div className="max-w-4xl mx-auto flex items-center justify-between">
-        <a href="/" className="font-semibold text-lg">
-          Padel Georgia
+    <nav
+      className="sticky top-0 z-50"
+      style={{
+        background: "rgba(8, 8, 8, 0.84)",
+        borderBottom: "1px solid rgba(255,255,255,0.055)",
+        backdropFilter: "blur(22px)",
+        WebkitBackdropFilter: "blur(22px)",
+      }}
+    >
+      <div className="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <a href="/" className="flex items-center gap-2.5 shrink-0 select-none">
+          <span
+            className="w-2 h-2 rounded-full bg-[#c9ff3b] pulse-dot shrink-0"
+          />
+          <span
+            className="text-base font-extrabold tracking-tighter text-white"
+            style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
+          >
+            PADEL<span className="text-[#c9ff3b]">GEO</span>
+          </span>
         </a>
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <a
-                href="/bookings"
-                className="text-sm text-gray-600 hover:text-black"
-              >
-                My bookings
-              </a>
-              <form action="/auth/signout" method="post">
-                <button className="text-sm text-gray-600 hover:text-black">
-                  Log out
-                </button>
-              </form>
-            </>
-          ) : (
-            <a
-              href="/login"
-              className="text-sm bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-            >
-              Log in
-            </a>
-          )}
-        </div>
+
+        <NavLinks isLoggedIn={!!user} hasClub={!!club} />
       </div>
     </nav>
   );

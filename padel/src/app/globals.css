@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: #c9ff3b;
+  --color-accent-dim: rgba(201, 255, 59, 0.12);
+  --color-surface: #111111;
+  --color-surface-2: #1a1a1a;
+  --color-bg: #080808;
+  --color-green-neon: #00ff87;
+  --color-red-neon: #ff3b5c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg: #080808;
+  --surface: #111111;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(201, 255, 59, 0.35);
+  --text-primary: #f0f0f0;
+  --text-muted: #888888;
+  --text-dim: #444444;
+  --accent: #c9ff3b;
+  --accent-glow: 0 0 40px rgba(201, 255, 59, 0.22);
+  --green-neon: #00ff87;
+  --red-neon: #ff3b5c;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #080808;
+  color: var(--text-primary);
+  font-family: var(--font-outfit, "Outfit", sans-serif);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Ambient top glow */
+body::before {
+  content: "";
+  position: fixed;
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 700px;
+  background: radial-gradient(
+    ellipse,
+    rgba(201, 255, 59, 0.035) 0%,
+    transparent 68%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-syne, "Syne", sans-serif);
+}
+
+/* ─── Glass card ──────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(201, 255, 59, 0.28);
+  box-shadow: 0 0 28px rgba(201, 255, 59, 0.07),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Gradient accent text ────────────────────────────────── */
+.accent-glow-text {
+  background: linear-gradient(125deg, #c9ff3b 0%, #00ff87 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Accent badge ────────────────────────────────────────── */
+.accent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: rgba(201, 255, 59, 0.1);
+  border: 1px solid rgba(201, 255, 59, 0.2);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #c9ff3b;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ─── Fade-up entrance ────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* ─── Spinner ─────────────────────────────────────────────── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  display: inline-block;
+}
+
+/* ─── Pulsing dot ─────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 255, 59, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(201, 255, 59, 0);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ─── Hide scrollbar (keep scroll behaviour) ─────────────── */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
