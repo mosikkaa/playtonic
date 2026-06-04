@@ -39,7 +39,7 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${outfit.variable} ${dmMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col antialiased bg-[#080808]">
+      <body className="min-h-full flex flex-col antialiased bg-[#f8fafc]">
         <Navbar />
         <div className="relative z-10 flex-1">{children}</div>
         <Footer />

@@ -24,12 +24,11 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="max-w-5xl mx-auto px-5 py-20">
-      {/* Section heading */}
+    <section id="how-it-works" className="max-w-7xl mx-auto px-5 py-20">
       <div className="mb-12">
         <div className="accent-badge mb-4">How it works</div>
         <h2
-          className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight"
+          className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] tracking-tight"
           style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
         >
           Three steps to your
@@ -38,17 +37,18 @@ export default function HowItWorksSection() {
         </h2>
       </div>
 
-      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {steps.map((step) => (
           <div
             key={step.label}
             className="glass-card rounded-2xl p-7 relative overflow-hidden group"
           >
-            {/* Large ghost number */}
             <span
-              className="absolute -top-4 -right-2 text-8xl font-extrabold text-white/[0.03] select-none leading-none"
-              style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
+              className="absolute -top-4 -right-2 text-8xl font-extrabold select-none leading-none"
+              style={{
+                fontFamily: "var(--font-syne, Syne, sans-serif)",
+                color: "rgba(15,23,42,0.03)",
+              }}
               aria-hidden
             >
               {step.label}
@@ -57,22 +57,22 @@ export default function HowItWorksSection() {
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5"
               style={{
-                background: "rgba(201,255,59,0.08)",
-                border: "1px solid rgba(201,255,59,0.15)",
+                background: "rgba(37,99,235,0.07)",
+                border: "1px solid rgba(37,99,235,0.12)",
               }}
             >
               {step.icon}
             </div>
 
             <h3
-              className="text-xl font-extrabold text-white mb-3 group-hover:text-[#c9ff3b] transition-colors duration-200"
+              className="text-xl font-extrabold text-[#0f172a] mb-3 group-hover:text-[#2563eb] transition-colors duration-200"
               style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
             >
               {step.title}
             </h3>
 
             <p
-              className="text-sm text-white/50 leading-relaxed"
+              className="text-sm text-slate-500 leading-relaxed"
               style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}
             >
               {step.description}

@@ -1,13 +1,31 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import RecentBookings from "@/app/components/bookings/RecentBookings";
+import CourtsTab from "@/app/components/dashboard/CourtsTab";
+import CalendarTab from "@/app/components/dashboard/CalendarTab";
+import ClubInfoTab from "@/app/components/dashboard/ClubInfoTab";
 
-export default async function DashboardPage() {
+const TABS = [
+  { id: "overview",  label: "Overview"  },
+  { id: "courts",    label: "Courts"    },
+  { id: "calendar",  label: "Calendar"  },
+  { id: "club",      label: "Club Info" },
+  { id: "photos",    label: "Photos"    },
+] as const;
+
+type TabId = typeof TABS[number]["id"];
+
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  const { tab: rawTab = "overview" } = await searchParams;
+  const tab = (TABS.some((t) => t.id === rawTab) ? rawTab : "overview") as TabId;
+
   const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
   const { data: club } = await supabase
@@ -18,144 +36,115 @@ export default async function DashboardPage() {
 
   if (!club) {
     return (
-      <main className="max-w-5xl mx-auto px-5 py-12">
+      <main className="max-w-7xl mx-auto px-5 py-12">
         <div className="glass-card rounded-2xl p-14 text-center">
-          <p className="text-white/40 text-lg">
-            You don&apos;t have a club yet.
-          </p>
+          <p className="text-slate-400 text-lg">You don&apos;t have a club yet.</p>
+          <a href="/register-club" className="inline-flex mt-6 px-6 py-3 rounded-xl bg-[#2563eb] text-white font-bold text-sm hover:bg-[#1d4ed8] transition-colors shadow-sm"
+            style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>
+            Register your club →
+          </a>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-5 py-12">
+    <main className="max-w-7xl mx-auto px-5 py-12">
       {/* Header */}
-      <div className="mb-10 animate-fade-up">
-        <h1
-          className="text-4xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight"
-          style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-        >
+      <div className="mb-8 animate-fade-up">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] tracking-tight mb-1" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>
           {club.name}
         </h1>
-        <p className="text-white/35 text-sm flex items-center gap-1.5 mt-1">
-          <svg
-            width="11"
-            height="13"
-            viewBox="0 0 11 13"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M5.5 0C3.014 0 1 2.014 1 4.5c0 3.375 4.5 8.5 4.5 8.5S10 7.875 10 4.5C10 2.014 7.986 0 5.5 0Zm0 6.5A2 2 0 1 1 5.5 2.5a2 2 0 0 1 0 4Z"
-              fill="currentColor"
-            />
+        <p className="text-slate-500 text-sm flex items-center gap-1.5 mt-1">
+          <svg width="10" height="13" viewBox="0 0 10 13" fill="currentColor" aria-hidden>
+            <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 8 5 8s5-4.25 5-8C10 2.24 7.76 0 5 0Zm0 7.5A2.5 2.5 0 1 1 5 2.5a2.5 2.5 0 0 1 0 5Z" />
           </svg>
           {club.address}
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 animate-fade-up delay-100">
-        {[
-          { label: "Courts", value: String(club.courts.length) },
-          { label: "Status", value: "Active" },
-        ].map(({ label, value }) => (
-          <div key={label} className="glass-card rounded-2xl p-5">
-            <p
-              className="text-xs text-white/35 mb-2 uppercase tracking-wider"
-              style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-            >
-              {label}
-            </p>
-            <p
-              className="text-3xl font-extrabold text-white"
-              style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-            >
-              {value}
-            </p>
-          </div>
+      {/* Tab nav */}
+      <div className="flex gap-1 p-1 rounded-2xl mb-8 overflow-x-auto scrollbar-hide animate-fade-up delay-100"
+        style={{ background: "rgba(15,23,42,0.04)", border: "1px solid rgba(15,23,42,0.08)", width: "fit-content" }}>
+        {TABS.map((t) => (
+          <Link key={t.id} href={t.id === "overview" ? "/dashboard" : `/dashboard?tab=${t.id}`}
+            className="shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+            style={{
+              fontFamily: "var(--font-syne, Syne, sans-serif)",
+              background: tab === t.id ? "#ffffff" : "transparent",
+              color: tab === t.id ? "#0f172a" : "#64748b",
+              boxShadow: tab === t.id ? "0 1px 3px rgba(15,23,42,0.08)" : "none",
+            }}>
+            {t.label}
+          </Link>
         ))}
       </div>
 
-      {/* Courts section */}
-      <div className="mb-10 animate-fade-up delay-200">
-        <div className="flex items-center justify-between mb-5">
-          <h2
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-          >
-            Courts
-          </h2>
-          <a
-            href="/dashboard/courts/new"
-            className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl bg-[#c9ff3b] text-black hover:bg-[#d9ff60] transition-all duration-200 hover:shadow-[0_0_24px_rgba(201,255,59,0.38)]"
-            style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-          >
-            + Add court
-          </a>
-        </div>
+      {/* Tab content */}
+      <div className="animate-fade-up delay-200">
 
-        <div className="grid gap-3">
-          {club.courts.map(
-            (court: {
-              id: string;
-              name: string;
-              type: string;
-              price_per_hour: number;
-            }) => (
-              <div
-                key={court.id}
-                className="glass-card rounded-2xl p-5 flex items-center justify-between"
-              >
-                <div>
-                  <h3
-                    className="font-bold text-white mb-0.5"
-                    style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-                  >
-                    {court.name}
-                  </h3>
-                  <p className="text-sm text-white/40 capitalize">
-                    {court.type} ·{" "}
-                    <span className="text-[#c9ff3b] font-semibold">
-                      {court.price_per_hour} GEL
-                    </span>{" "}
-                    / hour
-                  </p>
+        {/* ── Overview ───────────────────────────────────────── */}
+        {tab === "overview" && (
+          <>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+              {[
+                { label: "Courts",    value: String(club.courts.length) },
+                { label: "Status",    value: "Active" },
+                { label: "Indoor",    value: club.indoor  ? "Yes" : "No" },
+                { label: "Outdoor",   value: club.outdoor ? "Yes" : "No" },
+              ].map(({ label, value }) => (
+                <div key={label} className="glass-card rounded-2xl p-5">
+                  <p className="text-xs text-slate-400 mb-2 uppercase tracking-wider" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>{label}</p>
+                  <p className="text-2xl font-extrabold text-[#0f172a]" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>{value}</p>
                 </div>
-                <a
-                  href={`/dashboard/courts/${court.id}`}
-                  className="text-sm text-white/40 hover:text-white transition-colors px-4 py-2 rounded-xl border border-white/[0.08] hover:border-white/25"
-                  style={{
-                    fontFamily: "var(--font-outfit, Outfit, sans-serif)",
-                  }}
-                >
-                  Manage
-                </a>
-              </div>
-            ),
-          )}
-        </div>
-      </div>
+              ))}
+            </div>
 
-      {/* Recent bookings */}
-      <div className="animate-fade-up delay-300">
-        <div className="flex items-center justify-between mb-5">
-          <h2
-            className="text-xl font-bold text-white"
-            style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
-          >
-            Recent Bookings
-          </h2>
-          <a
-            href="/dashboard/bookings"
-            className="text-sm text-white/35 hover:text-white transition-colors"
-            style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}
-          >
-            View all →
-          </a>
-        </div>
-        <RecentBookings clubId={club.id} />
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-xl font-bold text-[#0f172a]" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>Recent Bookings</h2>
+              <Link href="/dashboard/bookings" className="text-sm text-slate-400 hover:text-slate-700 transition-colors" style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}>
+                View all →
+              </Link>
+            </div>
+            <RecentBookings clubId={club.id} />
+          </>
+        )}
+
+        {/* ── Courts ─────────────────────────────────────────── */}
+        {tab === "courts" && (
+          <CourtsTab courts={club.courts} clubId={club.id} />
+        )}
+
+        {/* ── Calendar ───────────────────────────────────────── */}
+        {tab === "calendar" && (
+          <CalendarTab courts={club.courts.map((c: { id: string; name: string }) => ({ id: c.id, name: c.name }))} />
+        )}
+
+        {/* ── Club Info ──────────────────────────────────────── */}
+        {tab === "club" && (
+          <ClubInfoTab club={{
+            id: club.id, name: club.name, description: club.description,
+            address: club.address, indoor: club.indoor, outdoor: club.outdoor,
+          }} />
+        )}
+
+        {/* ── Photos ─────────────────────────────────────────── */}
+        {tab === "photos" && (
+          <div>
+            <h2 className="text-lg font-bold text-[#0f172a] mb-6" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>Photos</h2>
+            <div className="glass-card rounded-2xl p-14 text-center">
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.15)" }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="5" width="20" height="15" rx="2" stroke="#2563eb" strokeWidth="1.5"/>
+                  <circle cx="9" cy="11" r="2.5" stroke="#2563eb" strokeWidth="1.5"/>
+                  <path d="M2 17l5-5 4 4 3-3 5 5" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <p className="text-[#0f172a] font-bold text-lg mb-2" style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}>Photo uploads coming soon</p>
+              <p className="text-slate-400 text-sm">You&apos;ll be able to upload court and club photos here.</p>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

@@ -10,15 +10,15 @@ export default async function Home() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-5 pt-20 pb-14">
+      <section className="max-w-7xl mx-auto px-5 pt-20 pb-14">
         <div className="animate-fade-up">
           <div className="accent-badge mb-7">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9ff3b] pulse-dot shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] pulse-dot shrink-0" />
             Tbilisi, Georgia
           </div>
 
           <h1
-            className="text-5xl sm:text-7xl font-extrabold text-white leading-[1.02] tracking-tight mb-6"
+            className="text-5xl sm:text-7xl font-extrabold text-[#0f172a] leading-[1.02] tracking-tight mb-6"
             style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
           >
             The best padel
@@ -28,7 +28,7 @@ export default async function Home() {
           </h1>
 
           <p
-            className="text-white/45 text-lg max-w-lg leading-relaxed mb-8"
+            className="text-slate-500 text-lg max-w-lg leading-relaxed mb-8"
             style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}
           >
             Browse, filter, and book padel courts across Tbilisi — real-time
@@ -38,7 +38,7 @@ export default async function Home() {
           <div className="flex items-center gap-4 flex-wrap">
             <a
               href="/padel-courts"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#c9ff3b] text-black font-bold text-sm hover:bg-[#d9ff60] transition-all duration-200 hover:shadow-[0_0_36px_rgba(201,255,59,0.42)]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#2563eb] text-white font-bold text-sm hover:bg-[#1d4ed8] transition-all duration-200 shadow-sm hover:shadow-md"
               style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
             >
               Find a court
@@ -48,7 +48,7 @@ export default async function Home() {
             </a>
             <a
               href="/#how-it-works"
-              className="text-sm text-white/45 hover:text-white transition-colors"
+              className="text-sm text-slate-400 hover:text-slate-700 transition-colors"
               style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}
             >
               How it works →
@@ -60,15 +60,15 @@ export default async function Home() {
       {/* ── Featured courts swiper ────────────────────────────────── */}
       {clubs && clubs.length > 0 && (
         <section className="pb-16 animate-fade-up delay-200">
-          <div className="max-w-5xl mx-auto px-5 mb-6">
+          <div className="max-w-7xl mx-auto px-5 mb-6">
             <h2
-              className="text-xl font-bold text-white"
+              className="text-xl font-bold text-[#0f172a]"
               style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
             >
               Featured courts
             </h2>
           </div>
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <ClubSwiper clubs={clubs} />
           </div>
         </section>
@@ -81,43 +81,42 @@ export default async function Home() {
       <TestimonialsSection />
 
       {/* ── CTA banner ───────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-5 pb-20">
+      <section className="max-w-7xl mx-auto px-5 pb-20">
         <div
           className="rounded-3xl p-10 text-center relative overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, rgba(201,255,59,0.1) 0%, rgba(0,255,135,0.06) 100%)",
-            border: "1px solid rgba(201,255,59,0.2)",
+            background: "linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(124,58,237,0.04) 100%)",
+            border: "1px solid rgba(37,99,235,0.14)",
           }}
         >
           <div
             className="absolute inset-0 pointer-events-none"
             aria-hidden
             style={{
-              background: "radial-gradient(ellipse at 50% 0%, rgba(201,255,59,0.12) 0%, transparent 60%)",
+              background: "radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.08) 0%, transparent 60%)",
             }}
           />
           <p
-            className="text-xs font-bold uppercase tracking-widest text-[#c9ff3b] mb-4"
+            className="text-xs font-bold uppercase tracking-widest text-[#2563eb] mb-4"
             style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
           >
             Ready to play?
           </p>
           <h3
-            className="text-3xl sm:text-4xl font-extrabold text-white mb-4"
+            className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] mb-4"
             style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
           >
             Book your court today.
           </h3>
           <p
-            className="text-white/50 text-base mb-8 max-w-sm mx-auto"
+            className="text-slate-500 text-base mb-8 max-w-sm mx-auto"
             style={{ fontFamily: "var(--font-outfit, Outfit, sans-serif)" }}
           >
-            Slots fill up fast on weekends. Secure yours now in just a few
-            taps.
+            Slots fill up fast on weekends. Secure yours now in just a few taps.
           </p>
           <a
             href="/padel-courts"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#c9ff3b] text-black font-bold text-sm hover:bg-[#d9ff60] transition-all duration-200 hover:shadow-[0_0_44px_rgba(201,255,59,0.45)]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#2563eb] text-white font-bold text-sm hover:bg-[#1d4ed8] transition-all duration-200 shadow-sm hover:shadow-lg"
             style={{ fontFamily: "var(--font-syne, Syne, sans-serif)" }}
           >
             Browse courts →
