@@ -4,36 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b67cb04f-3934-4605-8703-e0cda5383e60" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/playtonic.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/auth/callback/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/auth/callback/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/bookings/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/bookings/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/clubs/[id]/ClubDetailClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/clubs/[id]/ClubDetailClient.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/clubs/[id]/courts/[courtId]/book/[slotId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/clubs/[id]/courts/[courtId]/book/[slotId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/bookings/AnimatedBookingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/bookings/AnimatedBookingList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/bookings/RecentBookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/bookings/RecentBookings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/clubs/AnimatedClubList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/clubs/AnimatedClubList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/clubs/AnimatedCourtList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/clubs/AnimatedCourtList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/courts/AnimatedSlotGrid.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/courts/AnimatedSlotGrid.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/home/ClubSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/home/ClubSwiper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/home/HowItWorksSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/home/HowItWorksSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/home/TestimonialsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/home/TestimonialsSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/layout/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/layout/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/layout/NavLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/layout/NavLinks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/components/layout/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/components/layout/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/dashboard/courts/[courtsId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/dashboard/courts/[courtsId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/dashboard/courts/new/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/dashboard/courts/new/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/padel-courts/PadelCourtsClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/padel-courts/PadelCourtsClient.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padel/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/padel/src/app/page.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="b67cb04f-3934-4605-8703-e0cda5383e60" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,7 +78,7 @@
       <workItem from="1779618872357" duration="64000" />
       <workItem from="1779618985932" duration="11897000" />
       <workItem from="1779892419946" duration="2416000" />
-      <workItem from="1780406733642" duration="13163000" />
+      <workItem from="1780406733642" duration="13403000" />
     </task>
     <servers />
   </component>
